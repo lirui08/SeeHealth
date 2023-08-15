@@ -1,0 +1,11 @@
+apply from: '../module.build.gradle'
+android {
+    defaultConfig {
+        if (isDebug){
+            applicationId rootProject.ext.applicationid.home
+        }
+    }
+    //统一资源前缀,规范资源引用
+    resourcePrefix "home_"
+}
+

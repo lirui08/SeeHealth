@@ -1,0 +1,81 @@
+if (isDebug){
+    apply plugin: 'com.android.application'
+}else {
+    apply plugin: 'com.android.library'
+}
+apply plugin:'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+apply from: '../config.gradle'
+android {
+    compileSdk rootProject.ext.android.compileSdkVersion
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+    defaultConfig {
+        /*if (isDebug){
+            applicationId rootProject.ext.applicationid.user
+        }*/
+        minSdk rootProject.ext.android.minSdkVersion
+        targetSdk  rootProject.ext.android.targetSdkVersion
+        versionCode  rootProject.ext.android.versionCode
+        versionName rootProject.ext. android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        //kotlin 路由配置
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets{
+        main{
+            if (isDebug){
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    //resourcePrefix "user_"
+}
+/*kapt{
+    correctErrorTypes=true
+}*/
+dependencies {
+    testImplementation rootProject.ext.dependencies.junit
+    androidTestImplementation rootProject.ext.dependencies.junittest
+    androidTestImplementation rootProject.ext.dependencies.espressocore
+    api project(path: ':lib_common')
+//    api project(path: ':uikit')
+
+    //kotlin路由配置
+    kapt libARouterCompiler
+
+    api libViewmodel
+    api libLivedata
+    api libcoroutines
+    api libFragmentKtx
+    api libRxLifecycle
+
+    kapt libGlideCompiler
+}
+
+

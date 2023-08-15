@@ -1,0 +1,10 @@
+apply from: '../module.build.gradle'
+android {
+    defaultConfig {
+        if (isDebug){
+            applicationId rootProject.ext.applicationid.main
+        }
+    }
+    resourcePrefix "main_"
+}
+
