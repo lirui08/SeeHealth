@@ -74,6 +74,7 @@ dependencies {
     api libcoroutines
     api libFragmentKtx
     api libRxLifecycle
+    api libGson
 
     kapt libGlideCompiler
 }

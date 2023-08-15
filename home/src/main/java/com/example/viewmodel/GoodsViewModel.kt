@@ -60,7 +60,7 @@ class GoodsViewModel:ViewModel() {
                 _goodsState.value=GoodsState.Success(list.data!!)
             }else{
                 //返回失败状态
-                _goodsState.value=GoodsState.Error(list.msg)
+            // _goodsState.value=GoodsState.Error(list.msg)
             }
         }
     }

@@ -48,7 +48,6 @@ class HomeActivity : AppCompatActivity() {
             override fun onLongClick(entity: GoosData) {
                 ToastUtils.showLong(entity.goods_desc)
             }
-
         })
         //开启一个协程
         lifecycleScope.launch {
