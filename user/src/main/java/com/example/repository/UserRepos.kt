@@ -22,7 +22,8 @@ class UserRepos {
         }
     }
 
-    suspend fun regsiter(body:RequestBody): ResponseData<String?>{
+
+    suspend fun register(body:RequestBody): ResponseData<String?>{
         return withContext(Dispatchers.IO){
             apiService.register(body)
         }

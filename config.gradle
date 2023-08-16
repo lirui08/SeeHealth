@@ -82,8 +82,11 @@ ext{
     libRoomPaging = "androidx.room:room-paging:$room_version"
 
     //hilt依赖注入
-    libHilt = 'com.google.dagger:hilt-android:2.46'
-    libHiltCompiler = 'com.google.dagger:hilt-android-compiler:2.46'
+//    libHilt = 'com.google.dagger:hilt-android:2.46'
+//    libHiltCompiler = 'com.google.dagger:hilt-android-compiler:2.46'
+
+//    libHilt = "com.google.dagger:hilt-android:2.44"
+//    libHiltCompiler = "com.google.dagger:hilt-compiler:2.44"
 
     //bannerViewPager:引导页
     libBannerViewPager = 'com.github.zhpanvip:bannerviewpager:2.6.6'

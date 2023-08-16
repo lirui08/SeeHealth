@@ -2,12 +2,10 @@ package com.example.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.lib_http.entity.GoosData
 import com.example.repository.UserRepos
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import okhttp3.RequestBody
@@ -61,10 +59,10 @@ class UserViewModel:ViewModel() {
             }
         }
     }
-    //校验验证码
+    //注册
     fun register(body: RequestBody){
         viewModelScope.launch {
-            var list=userRepos.regsiter(body)
+            var list=userRepos.register(body)
             if(list.code==0){
                 //返回成功状态
                 _userState.value=UserState.RegisterSuccess(list.data)

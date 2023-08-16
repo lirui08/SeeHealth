@@ -3,6 +3,7 @@ package com.example.user
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,15 +18,14 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import java.lang.invoke.MethodType
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var db:ActivityRegisterBinding
     lateinit var vm:UserViewModel
     var code:Int=0
-    var phone:String?=null
-    var name:String?=null
-    var pass:String?=null
+    var phone:String? =null
+    var name:String? =null
+    var pass :String? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         db=ActivityRegisterBinding.inflate(layoutInflater)
@@ -39,12 +39,13 @@ class RegisterActivity : AppCompatActivity() {
                     is UserState.SendCodeSuccess -> {
                         code = it.code
                         ToastUtils.showLong(code.toString())
+                        Log.i("===",code.toString())
                     }
                     is UserState.CompareCodeSuccess->{
+                        //3、注册
                         register()
                     }
                     is UserState.RegisterSuccess->{
-                        ToastUtils.showLong("注册成功")
                         ARouter.getInstance().build(ActivityPath.PAGER_LOGIN).navigation()
                     }
                     is UserState.Error->ToastUtils.showLong(it.msg)
@@ -65,10 +66,6 @@ class RegisterActivity : AppCompatActivity() {
                 ToastUtils.showLong("密码格式不匹配")
                 return@setOnClickListener
             }
-//            if(this.code!=code.toInt()){
-//                ToastUtils.showLong("验证码不正确")
-//                return@setOnClickListener
-//            }
             //2、校验验证码
             lifecycleScope.launch {
                 //发送验证码意图
@@ -77,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
                 val body = RequestBody.create(MediaType.parse("application/json"), json)
                 vm.userchannel.send(UserIntent.compareCode(body))
             }
-            //3、注册
+
 
         }
 
