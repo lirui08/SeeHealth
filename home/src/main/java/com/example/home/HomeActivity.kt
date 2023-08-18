@@ -37,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         db=ActivityHomeBinding.inflate(layoutInflater)
         setContentView(db.root)
+        requestPermissions(arrayOf("android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE"),100)
         vm=ViewModelProvider(this).get(GoodsViewModel::class.java)
         val list = mutableListOf<GoosData>()
         goodsAdapter= GoodsAdapter(this,list,object :GoodsAdapter.ClickListener{

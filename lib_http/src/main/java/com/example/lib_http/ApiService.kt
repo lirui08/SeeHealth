@@ -2,13 +2,11 @@ package com.example.lib_http
 
 import com.example.lib_http.entity.GoosData
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
+    @Headers("Cache-Control:public,max-age=120")
     @GET("goods/info?category_id=0&pageSize=10")
     suspend fun getGoods(@Query("currentPage") currentPage:Int):ResponseData<MutableList<GoosData>>
 
